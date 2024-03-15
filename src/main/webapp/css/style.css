@@ -1,0 +1,100 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    color: rgb(21, 21, 21);
+}
+
+
+#musicAlbum {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    background: url('../images/loginImage.jpg') center/cover no-repeat;
+    padding-left: 100px;
+
+}
+
+#musicAlbum h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5em;
+    font-weight: 550;
+    text-shadow: 2px 2px 4px rgb(69, 123, 157);
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+}
+
+header.login {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.content {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginform {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.loginform input[type="text"],
+.loginform input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    font-size: 1em;
+}
+
+.loginform input[type="text"]:focus,
+.loginform input[type="password"]:focus {
+    border-color: #457b9d;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.loginform input[type="submit"] {
+    width: 60%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #457b9d;
+    color: white;
+    cursor: pointer;
+}
+
+.loginform input[type="submit"]:hover {
+    background-color: #1d3557;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 8;
+}
+
+.loginmessage {
+    color: red;
+}
+
+
+
+
