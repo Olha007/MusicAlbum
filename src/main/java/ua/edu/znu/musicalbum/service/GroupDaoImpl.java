@@ -12,40 +12,32 @@ public class GroupDaoImpl extends MusicAlbumDaoImpl<Group> {
         setClazz(Group.class);
     }
 
-    // Пошук групи за назвою
-    public List<Group> findByGroupName(String groupName) {
+    //пошук групи за назвою
+    public Group findByName(final String groupName) {
         EntityManager entityManager = getEntityManager();
         TypedQuery<Group> query = entityManager.createQuery(
-                        "SELECT g FROM Group g WHERE g.groupName = :groupName", Group.class)
-                .setParameter("groupName", groupName);
-        return getResultList(query);
+                "SELECT g FROM Group g WHERE g.groupName = :groupName", Group.class);
+        query.setParameter("groupName", groupName);
+        return getSingleResult(query);
     }
 
-    // Створення нової групи
-    public void create(Group group) {
+    //отримання всіх груп, які мають альбоми в певному жанрі
+    public List<Group> findByGenre(final String genreName) {
         EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.persist(group);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        TypedQuery<Group> query = entityManager.createQuery(
+                "SELECT DISTINCT aag.group FROM AlbumArtistGroup aag JOIN aag.album.albums al JOIN al.songs s JOIN s.genre g WHERE g.genreName = :genreName", Group.class);
+        query.setParameter("genreName", genreName);
+        return query.getResultList();
     }
 
-    // Оновлення інформації про групу
-    public void update(Group group) {
+    //отримання груп, які випустили альбом в певний рік
+    public List<Group> findByAlbumReleaseYear(final int releaseYear) {
         EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.merge(group);
-        entityManager.getTransaction().commit();
-        entityManager.close();
-    }
-
-    // Видалення групи
-    public void delete(Group group) {
-        EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.remove(entityManager.contains(group) ? group : entityManager.merge(group));
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        TypedQuery<Group> query = entityManager.createQuery(
+                "SELECT DISTINCT aag.group FROM AlbumArtistGroup aag JOIN aag.album al WHERE al.releaseYear = :releaseYear", Group.class);
+        query.setParameter("releaseYear", releaseYear);
+        return query.getResultList();
     }
 }
+
 

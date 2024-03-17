@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Music Album - Registration</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/style.css" th:href="@{/css/style.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+</head>
+<body>
+<section id="musicAlbum">
+    <div class="container">
+        <div th:insert="fragments/header :: header"></div>
+        <div class="content">
+            <div class="companyname">
+
+            </div>
+            <div class="loginform">
+                <form action="RegistrationServlet" method="post">
+                    <p>Username: <input type="text" name="username"/></p>
+                    <p>Password: <input type="password" name="password"/></p>
+                    <p><input type="submit" value="Register" style="float: right"/></p>
+                </form>
+                <br/>
+                <a href="login.html" th:href="@{/login.html}">Login</a>
+            </div>
+        </div>
+        <div th:insert="fragments/footer :: footer"></div>
+    </div>
+</section>
+</body>
+</html>

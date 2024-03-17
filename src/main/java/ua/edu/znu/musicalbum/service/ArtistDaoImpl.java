@@ -1,7 +1,6 @@
 package ua.edu.znu.musicalbum.service;
 
 import ua.edu.znu.musicalbum.model.*;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -12,67 +11,32 @@ public class ArtistDaoImpl extends MusicAlbumDaoImpl<Artist> {
         setClazz(Artist.class);
     }
 
-    // Пошук артистів за жанром
-    public List<Artist> findByGenre(final Genre genre) {
+    public Artist findByName(final String firstName, final String lastName) {
         EntityManager entityManager = getEntityManager();
         TypedQuery<Artist> query = entityManager.createQuery(
-                        "SELECT DISTINCT a FROM Artist a " +
-                                "JOIN a.albumArtistGroups aa " +
-                                "JOIN aa.album al " +
-                                "WHERE :genre MEMBER OF al.genres", Artist.class)
-                .setParameter("genre", genre);
-        return getResultList(query);
+                "SELECT a FROM Artist a WHERE a.firstName = :firstName AND a.lastName = :lastName", Artist.class);
+        query.setParameter("firstName", firstName);
+        query.setParameter("lastName", lastName);
+        return getSingleResult(query);
     }
 
-    // Пошук артистів за ім'ям або прізвищем
-    public List<Artist> findByName(String name) {
+    public List<Artist> findByAlbum(final String albumName) {
         EntityManager entityManager = getEntityManager();
         TypedQuery<Artist> query = entityManager.createQuery(
-                        "SELECT a FROM Artist a " +
-                                "WHERE a.firstName = :name OR a.lastName = :name", Artist.class)
-                .setParameter("name", name);
-        return getResultList(query);
+                "SELECT aag.artist FROM AlbumArtistGroup aag WHERE aag.album.albumName = :albumName", Artist.class);
+        query.setParameter("albumName", albumName);
+        return query.getResultList();
     }
 
-    // Створення нового артиста
-    public void create(Artist artist) {
-        EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.persist(artist);
-        entityManager.getTransaction().commit();
-        entityManager.close();
-    }
-
-    // Оновлення інформації про артиста
-    public void update(Artist artist) {
-        EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.merge(artist);
-        entityManager.getTransaction().commit();
-        entityManager.close();
-    }
-
-    // Видалення артиста
-    public void delete(Artist artist) {
-        EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.remove(entityManager.contains(artist) ? artist : entityManager.merge(artist));
-        entityManager.getTransaction().commit();
-        entityManager.close();
-    }
-
-    // Пошук артистів за альбомом
-    public List<Artist> findByAlbum(Album album) {
+    public List<Artist> findByGenre(final String genreName) {
         EntityManager entityManager = getEntityManager();
         TypedQuery<Artist> query = entityManager.createQuery(
-                        "SELECT DISTINCT a FROM Artist a " +
-                                "JOIN a.albumArtistGroups aa " +
-                                "WHERE aa.album = :album", Artist.class)
-                .setParameter("album", album);
-        return getResultList(query);
+                "SELECT DISTINCT a FROM Artist a JOIN a.albumArtistGroups al JOIN al.album c JOIN c.songs g WHERE g.genre = :genreName", Artist.class);
+        query.setParameter("genreName", genreName);
+        return query.getResultList();
     }
-
 }
+
 
 
 

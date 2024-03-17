@@ -11,39 +11,37 @@ public class AlbumDaoImpl extends MusicAlbumDaoImpl<Album> {
         setClazz(Album.class);
     }
 
-    // Метод для пошуку альбомів за назвою
-    public List<Album> findByAlbumName(String albumName) {
+    public Album findByAlbumName(final String albumName) {
+        EntityManager entityManager = getEntityManager();
+        TypedQuery<Album> query = entityManager
+                .createQuery("SELECT a FROM Album a WHERE a.albumName = :albumName", Album.class)
+                .setParameter("albumName", albumName);
+        return getSingleResult(query);
+    }
+
+    public List<Album> findByReleaseYear(final int releaseYear) {
         EntityManager entityManager = getEntityManager();
         TypedQuery<Album> query = entityManager.createQuery(
-                        "SELECT a FROM Album a WHERE a.albumName = :albumName", Album.class)
-                .setParameter("albumName", albumName);
-        return getResultList(query);
+                        "SELECT a FROM Album a WHERE a.releaseYear = :releaseYear", Album.class)
+                .setParameter("releaseYear", releaseYear);
+        return query.getResultList();
     }
 
-    public void create(Album album) {
+
+    public List<Album> findByArtist(final String firstName, final String lastName) {
         EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.persist(album);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        TypedQuery<Album> query = entityManager.createQuery(
+                        "SELECT aag.album FROM AlbumArtistGroup aag WHERE aag.artist.firstName = :firstName AND aag.artist.lastName = :lastName", Album.class)
+                .setParameter("firstName", firstName)
+                .setParameter("lastName", lastName);
+        return query.getResultList();
     }
 
-    public void update(Album album) {
-        EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.merge(album);
-        entityManager.getTransaction().commit();
-        entityManager.close();
-    }
-
-    public void delete(Album album) {
-        EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.remove(entityManager.contains(album) ? album : entityManager.merge(album));
-        entityManager.getTransaction().commit();
-        entityManager.close();
-    }
 }
+
+
+
+
 
 
 
