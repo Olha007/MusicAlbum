@@ -8,6 +8,6 @@
     <display-name>MusicAlbumWebApp</display-name>
 
     <welcome-file-list>
-        <welcome-file>/WEB-INF/templates/login.html</welcome-file>//файл першої сторінки(логін)
+        <welcome-file>/WEB-INF/templates/login.html</welcome-file>
     </welcome-file-list>
 </web-app>

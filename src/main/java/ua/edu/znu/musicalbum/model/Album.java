@@ -3,6 +3,7 @@ package ua.edu.znu.musicalbum.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -22,9 +23,11 @@ public class Album {
     @Column(name = "release_year")
     private Integer releaseYear;
 
-    @OneToMany(mappedBy = "album", cascade = CascadeType.MERGE)
+    @ManyToMany
     @JoinTable(name = "album_songs",
             joinColumns = @JoinColumn(name = "album_id"),
             inverseJoinColumns = @JoinColumn(name = "song_id"))
     private Set<Song> songs = new LinkedHashSet<>();
+
+
 }

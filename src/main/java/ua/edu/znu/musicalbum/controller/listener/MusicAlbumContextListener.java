@@ -14,6 +14,8 @@ public class MusicAlbumContextListener implements ServletContextListener {
     private GroupDaoImpl groupDao;
     private SongDaoImpl songDao;
 
+    private UserDaoImpl userDao;
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContextListener.super.contextInitialized(sce);
@@ -23,6 +25,7 @@ public class MusicAlbumContextListener implements ServletContextListener {
         genreDao = new GenreDaoImpl();
         groupDao = new GroupDaoImpl();
         songDao = new SongDaoImpl();
+        userDao = new UserDaoImpl();
 
         ServletContext app = sce.getServletContext();
         app.setAttribute("albumDao", albumDao);
@@ -30,6 +33,7 @@ public class MusicAlbumContextListener implements ServletContextListener {
         app.setAttribute("genreDao", genreDao);
         app.setAttribute("groupDao", groupDao);
         app.setAttribute("songDao", songDao);
+        app.setAttribute("userDao", userDao);
     }
 
     @Override
@@ -41,6 +45,7 @@ public class MusicAlbumContextListener implements ServletContextListener {
         genreDao = null;
         groupDao = null;
         songDao = null;
+        userDao = null;
     }
 }
 

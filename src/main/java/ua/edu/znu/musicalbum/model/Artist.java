@@ -23,7 +23,4 @@ public class Artist {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy = "artist", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private Set<AlbumArtistGroup> albumArtistGroups = new LinkedHashSet<>();
-
 }

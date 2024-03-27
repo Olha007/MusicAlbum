@@ -11,30 +11,40 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import ua.edu.znu.musicalbum.model.User;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/AlbumServlet", "/ArtistServlet", "/GenreServlet", "/GroupServlet", "/SongServlet","/HomeServlet", "/LoginServlet"},
+@WebFilter(urlPatterns = {"/AlbumServlet", "/ArtistServlet", "/GenreServlet", "/GroupServlet", "/SongServlet","/HomeServlet"},
         dispatcherTypes = {DispatcherType.FORWARD, DispatcherType.REQUEST})
 public class AuthFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+        Filter.super.init(filterConfig);
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
+        resp.setContentType("text/html;charset=UTF-8");
         HttpSession session = req.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
             resp.sendRedirect(req.getContextPath());
         } else {
-            chain.doFilter(req, resp);
+            String sessionID = session.getId();
+            System.out.println("AuthFilter: sessionID = " + sessionID);
+            User user = (User) session.getAttribute("user");
+            if (user == null) {
+                session.invalidate();
+                resp.sendRedirect(req.getContextPath());
+            } else {
+                chain.doFilter(req, resp);
+            }
         }
     }
-
-    @Override
-    public void destroy() {
+        @Override
+        public void destroy () {
+            Filter.super.destroy();
+        }
     }
-}
-

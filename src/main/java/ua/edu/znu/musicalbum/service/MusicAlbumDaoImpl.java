@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract class MusicAlbumDaoImpl<T> implements MusicAlbumDao<T> {
     protected static EntityManager getEntityManager() {
-        return Persistence.createEntityManagerFactory("musicAlbum").createEntityManager();
+        return Persistence.createEntityManagerFactory("musicAlbumPU").createEntityManager();
     }
 
     private Class<T> clazz;

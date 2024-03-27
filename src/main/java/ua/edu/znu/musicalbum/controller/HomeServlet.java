@@ -7,14 +7,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ua.edu.znu.musicalbum.model.Album;
+import ua.edu.znu.musicalbum.model.DTO.MusicAlbumDTO;
 import ua.edu.znu.musicalbum.service.AlbumDaoImpl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The start point for the authenticated user.
- */
 @WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
 
@@ -35,9 +34,18 @@ public class HomeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         AlbumDaoImpl albumDao = (AlbumDaoImpl) getServletContext().getAttribute("albumDao");
         List<Album> albums = albumDao.findAll();
-        String nextUrl = "home"; // Встановлюємо наступний URL для переходу
-        request.setAttribute("albums", albums); // Передаємо список альбомів у запит
-        request.setAttribute("nextUrl", nextUrl); // Передаємо наступний URL для переходу
+        List<MusicAlbumDTO> musicAlbumDTOS = new ArrayList<>();
+        for (Album album : albums) {
+            MusicAlbumDTO musicAlbumDTO = new MusicAlbumDTO();
+            musicAlbumDTO.setId(album.getId());
+            musicAlbumDTO.setAlbumName(album.getAlbumName());
+
+
+            musicAlbumDTOS.add(musicAlbumDTO);
+        }
+
+        String nextUrl = "home";
+        request.setAttribute("musicAlbumDTOS", musicAlbumDTOS);
+        request.setAttribute("nextUrl", nextUrl);
     }
 }
-

@@ -1,14 +1,10 @@
 package ua.edu.znu.musicalbum.model;
 
 import javax.persistence.*;
-
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 
 @Data
-@Getter
-@Setter
 @Entity
 @Table(name = "`group`")
 public class Group {
@@ -19,5 +15,4 @@ public class Group {
 
     @Column(name = "group_name")
     private String groupName;
-
 }
