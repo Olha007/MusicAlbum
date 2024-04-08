@@ -58,9 +58,9 @@ TABLES;
 
 LOCK
 TABLES `songs` WRITE;
-INSERT INTO songs (song_id, song_name, duration_minutes, duration_seconds)
-VALUES (1, 'Songs 1', 3, 30),
-       (2, 'Songs 2', 4, 15);
+INSERT INTO songs (song_id, song_name, duration_minutes, duration_seconds, genre_id)
+VALUES (1, 'Songs 1', 3, 30, 1),
+       (2, 'Songs 2', 4, 15, 2);
 UNLOCK
 TABLES;
 
@@ -92,6 +92,16 @@ LOCK
     TABLES `album_artist_group` WRITE;
 INSERT INTO album_artist_group (album_id, artist_id, group_id)
 VALUES (1, 2, 1);
+UNLOCK
+    TABLES;
+
+LOCK
+    TABLES `album_songs` WRITE;
+INSERT INTO album_songs (album_id, song_id)
+VALUES (1, 1),
+       (1, 2),
+       (2, 1),
+       (3, 2);
 UNLOCK
     TABLES;
 
