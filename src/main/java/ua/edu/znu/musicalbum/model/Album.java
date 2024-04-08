@@ -10,7 +10,6 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "album")
-
 public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,5 +28,8 @@ public class Album {
             inverseJoinColumns = @JoinColumn(name = "song_id"))
     private Set<Song> songs = new LinkedHashSet<>();
 
-
+    @OneToMany(mappedBy = "album", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Collection<AlbumArtistGroup> albumArtistGroups;
 }
