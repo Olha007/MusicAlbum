@@ -8,9 +8,10 @@
 <body>
 <section id="musicAlbum">
   <div class="container">
-    <header class="login">
-      <h1>Music Album</h1>
-    </header>
+    <div th:insert="fragments/header :: header"></div>
+<!--    <header class="login">-->
+<!--      <h1>Music Album</h1>-->
+<!--    </header>-->
 
     <div class="content">
       <div class="tables">
@@ -24,12 +25,12 @@
             <th>Group</th>
             <th>Edit Album</th>
           </tr>
-          <tr th:each="album : ${albums}">
+          <tr th:each="album : ${musicAlbumDTOS}">
             <td th:text="${album.albumName}">Album name</td>
-            <td th:text="${album.genre.name}">Genre</td>
+            <td th:text="${album.genres}">Genre</td>
             <td th:text="${album.releaseYear}">Release year</td>
-            <td th:text="${album.artist.firstName + ' ' + album.artist.lastName}">Artist</td>
-            <td th:text="${album.albumArtistGroup.group.groupName}">Group</td>
+            <td th:text="${album.artistName}">Artist</td>
+            <td th:text="${album.groupName}">Group</td>
             <td>
               <form th:action="@{/MusicAlbumDetailServlet}" method="post">
                 <input type="hidden" name="action" value="viewDetails"/>

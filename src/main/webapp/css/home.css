@@ -13,6 +13,13 @@ body {
     overflow: hidden;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+}
+
 /* Стилі заголовка */
 header.login {
     text-align: center;
