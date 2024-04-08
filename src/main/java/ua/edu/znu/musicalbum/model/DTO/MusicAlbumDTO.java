@@ -12,11 +12,10 @@ import java.util.Set;
 public class MusicAlbumDTO {
     private Long id;
     private String albumName;
-    private String genreId;
+    private String genres;
     private Integer releaseYear;
     private String artistName;
-    private String group;
-
+    private String groupName;
 }
 
 
