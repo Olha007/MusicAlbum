@@ -96,6 +96,15 @@ UNLOCK
     TABLES;
 
 LOCK
+    TABLES `album_songs` WRITE;
+INSERT INTO album_songs (album_id, song_id)
+VALUES (1, 1),
+       (1, 2),
+       (2, 1);
+UNLOCK
+    TABLES;
+
+LOCK
 TABLES `users` WRITE;
 INSERT INTO `users` (id, `username`, password)
 VALUES (1, 'foo', 'bar');
