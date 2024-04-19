@@ -9,12 +9,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import ua.edu.znu.musicalbum.model.Artist;
 import ua.edu.znu.musicalbum.service.ArtistDaoImpl;
 
-
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/ArtistsServlet")
-public class ArtistsServlet extends HttpServlet {
+@WebServlet("/ArtistAddServlet")
+public class ArtistAddServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -24,37 +22,26 @@ public class ArtistsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) {
-        response.setContentType("text/html;charset=UTF-8");
-        ArtistDaoImpl artistDao = (ArtistDaoImpl) getServletContext().getAttribute("artistDao");
-        List<Artist> artists = artistDao.findAll();
-        String nextUrl = "artists";
-        request.setAttribute("artists", artists);
+        String nextUrl = "artistadd";
         request.setAttribute("nextUrl", nextUrl);
     }
 
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
-            throws IOException {
-        String action = request.getParameter("action");
+            throws IOException, ServletException {
         ArtistDaoImpl artistDao = (ArtistDaoImpl) getServletContext().getAttribute("artistDao");
-        long artistId = Long.parseLong(request.getParameter("artistId"));
-        Artist artist = artistDao.findById(artistId);
-        switch (action) {
-            case "artistEdit" -> {
-                String artistFirstName = request.getParameter("artistFirstName");
-                artist.setFirstName(artistFirstName);
-                String artistLastName = request.getParameter("artistLastName");
-                artist.setLastName(artistLastName);
-                artistDao.update(artist);
-            }
-            case "artistRemove" -> {
-                artistDao.delete(artist);
-            }
-        }
+        Artist artist  = new Artist();
+        String artistFirstName = request.getParameter("artistFirstName");
+        artist.setFirstName(artistFirstName);
+        String artistLastName = request.getParameter("artistLastName");
+        artist.setLastName(artistLastName);
+        artistDao.create(artist);
+
+//        artist = artistDao.findByName(artistFirstName, artistLastName);
+
         String nextUrl = "artists";
         request.setAttribute("nextUrl", nextUrl);
         response.sendRedirect(request.getContextPath() + "/ArtistsServlet");
     }
 }
-

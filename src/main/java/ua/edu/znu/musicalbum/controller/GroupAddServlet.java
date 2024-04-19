@@ -10,10 +10,9 @@ import ua.edu.znu.musicalbum.model.Group;
 import ua.edu.znu.musicalbum.service.GroupDaoImpl;
 
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/GroupsServlet")
-public class GroupsServlet extends HttpServlet {
+@WebServlet("/GroupAddServlet")
+public class GroupAddServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -23,35 +22,21 @@ public class GroupsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) {
-        response.setContentType("text/html;charset=UTF-8");
-        GroupDaoImpl groupDao = (GroupDaoImpl) getServletContext().getAttribute("groupDao");
-        List<Group> groups = groupDao.findAll();
-        String nextUrl = "groups";
-        request.setAttribute("groups", groups);
+        String nextUrl = "groupadd";
         request.setAttribute("nextUrl", nextUrl);
     }
 
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
-            throws IOException {
-        String action = request.getParameter("action");
+            throws IOException, ServletException {
         GroupDaoImpl groupDao = (GroupDaoImpl) getServletContext().getAttribute("groupDao");
-        long groupId = Long.parseLong(request.getParameter("groupId"));
-        Group group = groupDao.findById(groupId);
-        switch (action) {
-            case "groupEdit" -> {
-                String groupName = request.getParameter("groupName");
-                group.setGroupName(groupName);
-                groupDao.update(group);
-            }
-            case "groupRemove" -> {
-                groupDao.delete(group);
-            }
-        }
+        Group group = new Group();
+        String groupName = request.getParameter("groupName");
+        group.setGroupName(groupName);
+        groupDao.create(group);
         String nextUrl = "groups";
         request.setAttribute("nextUrl", nextUrl);
         response.sendRedirect(request.getContextPath() + "/GroupsServlet");
     }
 }
-

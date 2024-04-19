@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "genre")
+@Table(name = "genres")
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +23,4 @@ public class Genre {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "genre", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<Song> songs = new LinkedHashSet<>();
-
 }

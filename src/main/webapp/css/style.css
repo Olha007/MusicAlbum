@@ -13,7 +13,6 @@ html, body {
     justify-content: flex-start;
     min-height: 100vh;
     background: url('../images/loginImage.jpg') center/cover no-repeat;
-    padding-left: 100px;
 
 }
 
@@ -42,14 +41,15 @@ header.login {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .loginform {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    padding-left: 100px;
 }
+
 
 .loginform input[type="text"],
 .loginform input[type="password"] {

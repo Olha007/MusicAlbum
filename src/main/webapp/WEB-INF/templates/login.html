@@ -1,41 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <title>Music Album - Login</title>
-  <link type="text/css" media="all" href="css/style.css" rel="stylesheet" th:href="@{/css/style.css}" />
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <title>Music Album - Login</title>
+    <link type="text/css" media="all" href="css/style.css" rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
 </head>
 <body>
 <section id="musicAlbum">
-  <div class="container">
-    <header class="login">
-      <img src="images/logo.png" alt="logo" width="50" height="50">
-      <h1 style="margin-left: 100px;">Music Album</h1>
-    </header>
-    <div class="content">
-      <div class="companyname">
-<!--        <img src="images/loginImage.jpg" alt="Music Album" width="600" height="350">-->
-      </div>
-      <div class="loginform">
-        <form action="LoginServlet" method="post">
-          <p>Username: <input type="text" name="username"/></p>
-          <p>Password: <input type="password" name="password"/></p>
-          <input type="hidden" name="action" id="action" value="login"/>
-          <p><input type="submit" value="Login" style="float: left"/></p>
-        </form>
-      </div>
-      <br/>
-      <h3 th:text="${message}" class="loginmessage"></h3>
+    <div class="container">
+        <header class="login">
+            <h1 style="margin-left: 100px;">Music Album</h1>
+        </header>
+        <div class="content">
+            <div class="companyname">
+            </div>
+            <div class="loginform">
+                <form action="LoginServlet" method="post">
+                    <p>Username: <input type="text" name="username"/></p>
+                    <p>Password: <input type="password" name="password"/></p>
+                    <input type="hidden" name="action" id="action" value="login"/>
+                    <p><input type="submit" value="Login" style="float: left"/></p>
+                </form>
+            </div>
+            <br/>
+            <h3 th:text="${message}" class="loginmessage"></h3>
+        </div>
+        <footer>
+            <h3>Music album &copy; 2023-2024</h3>
+        </footer>
     </div>
-  </div>
-  <footer>
-    <h3>Music Album &copy; 2023-2024</h3>
-  </footer>
 </section>
 </body>
 </html>

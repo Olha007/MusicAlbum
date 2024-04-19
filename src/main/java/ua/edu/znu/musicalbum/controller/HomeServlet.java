@@ -21,7 +21,6 @@ import java.util.Set;
 
 @WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
-
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -44,7 +43,6 @@ public class HomeServlet extends HttpServlet {
             MusicAlbumDTO musicAlbumDTO = new MusicAlbumDTO();
             musicAlbumDTO.setId(album.getId());
             musicAlbumDTO.setAlbumName(album.getAlbumName());
-            /*Add Album songs genres to DTO*/
             Set<Song> songs = album.getSongs();
             StringBuilder genres = new StringBuilder();
             for (Song song : songs) {
@@ -54,12 +52,11 @@ public class HomeServlet extends HttpServlet {
             musicAlbumDTO.setGenres(genres.toString());
 
             musicAlbumDTO.setReleaseYear(album.getReleaseYear());
-            /*Add Album artists to DTO*/
             Collection<AlbumArtistGroup> albumArtistGroups = album.getAlbumArtistGroups();
             StringBuilder artists = new StringBuilder();
             for (AlbumArtistGroup albumArtistGroup : albumArtistGroups) {
                 Artist artist = albumArtistGroup.getArtist();
-                if(artist != null) {
+                if (artist != null) {
                     artists.append(artist.getFirstName()).append(", ").append(artist.getLastName()).append("; ");
                 }
             }
@@ -67,7 +64,7 @@ public class HomeServlet extends HttpServlet {
             /*Add Album groups to DTO*/
             StringBuilder groups = new StringBuilder();
             for (AlbumArtistGroup albumArtistGroup : albumArtistGroups) {
-                if(albumArtistGroup.getGroup() != null) {
+                if (albumArtistGroup.getGroup() != null) {
                     groups.append(albumArtistGroup.getGroup().getGroupName());
                 }
             }

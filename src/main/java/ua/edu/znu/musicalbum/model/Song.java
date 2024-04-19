@@ -24,7 +24,7 @@ public class Song {
     private Integer durationMinutes;
 
     @Column(name = "duration_seconds")
-    private Long durationSeconds;
+    private Integer durationSeconds;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

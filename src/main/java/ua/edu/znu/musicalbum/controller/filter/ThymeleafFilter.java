@@ -20,7 +20,13 @@ import ua.edu.znu.musicalbum.controller.listener.ThymeleafConfigurationListener;
 import java.io.IOException;
 import java.util.Enumeration;
 
-@WebFilter(urlPatterns = {"/AlbumServlet", "/ArtistServlet", "/GenreServlet", "/GroupServlet", "/SongServlet","/HomeServlet", "/LoginServlet"},
+@WebFilter(urlPatterns = {"/LoginServlet", "/HomeServlet",
+        "/GenresServlet", "/GenreAddServlet", "/GenreEditServlet",
+        "/ArtistsServlet", "/ArtistAddServlet", "/ArtistEditServlet",
+        "/GroupsServlet", "/GroupAddServlet", "/GroupEditServlet",
+        "/SongsServlet", "/SongAddServlet", "/SongEditServlet",
+        "/AlbumAssignmentServlet"},
+
         dispatcherTypes = {DispatcherType.FORWARD, DispatcherType.REQUEST})
 public class ThymeleafFilter implements Filter {
 

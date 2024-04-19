@@ -15,7 +15,11 @@ import ua.edu.znu.musicalbum.model.User;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/AlbumServlet", "/ArtistServlet", "/GenreServlet", "/GroupServlet", "/SongServlet","/HomeServlet"},
+@WebFilter(urlPatterns = {"/HomeServlet", "/AlbumAssignmentServlet",
+        "/GenresServlet", "/GenreAddServlet", "/GenreEditServlet",
+        "/ArtistsServlet", "/ArtistAddServlet", "/ArtistEditServlet",
+        "/GroupsServlet", "/GroupAddServlet", "/GroupEditServlet",
+        "/SongsServlet", "/SongAddServlet", "/SongEditServlet",},
         dispatcherTypes = {DispatcherType.FORWARD, DispatcherType.REQUEST})
 public class AuthFilter implements Filter {
     @Override
@@ -43,8 +47,9 @@ public class AuthFilter implements Filter {
             }
         }
     }
-        @Override
-        public void destroy () {
-            Filter.super.destroy();
-        }
+
+    @Override
+    public void destroy() {
+        Filter.super.destroy();
     }
+}

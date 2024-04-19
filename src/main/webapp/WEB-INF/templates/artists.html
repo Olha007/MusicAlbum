@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Artists</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/home.css" th:href="@{/css/home.css}"/>
+</head>
+<body>
+<section id="musicAlbum">
+    <div class="container">
+        <div th:insert="fragments/header :: header"></div>
+
+        <div class="tables">
+            <table border="1">
+                <caption>Artists:</caption>
+                <tr>
+                    <th>Artist id</th>
+                    <th>Artist first name</th>
+                    <th>Artist last name</th>
+                    <th>Edit artist</th>
+                    <th>Remove artist</th>
+                </tr>
+                <tr th:each="artist : ${artists}">
+                    <td th:utext="${artist.id}">artistId</td>
+                    <td th:utext="${artist.firstName}">artistFirstName</td>
+                    <td th:utext="${artist.lastName}">artistLastName</td>
+                    <td>
+                        <form th:action="@{/ArtistEditServlet}" method="post">
+                            <input type="hidden" name="action"
+                                   value="artistEdit"/>
+                            <input type="hidden" name="artistId"
+                                   th:value="${artist.id}"/>
+                            <input type="submit" value="Edit"/>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/ArtistsServlet}" method="post">
+                            <input type="hidden" name="action"
+                                   value="artistRemove"/>
+                            <input type="hidden" name="artistId"
+                                   th:value="${artist.id}"/>
+                            <input type="submit" value="Remove"/>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+
+            <p><a href="artistadd.html" th:href="@{/ArtistAddServlet}">Add artist</a></p>
+
+            <div th:insert="fragments/footer :: footer"></div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Song</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/home.css" th:href="@{/css/home.css}"/>
+</head>
+<body>
+<section id="musicAlbum">
+    <div class="container">
+        <div th:insert="fragments/header :: header"></div>
+        <div class="addeditentity">
+            <form th:action="@{/SongsServlet}" method="post">
+                <input type="hidden" name="action"
+                       value="songEdit"/>
+                <label for="songId">Song Id:</label><br>
+                <input type="text" id=songId name="songId" th:value="${song.id}" readonly/><br>
+                <label for="songName">Song name:</label><br>
+                <input type="text" id=songName name="songName" th:value="${song.name}"/><br>
+                <label for="songDurationMinutes">Song duration minutes:</label><br>
+                <input type="text" id=songDurationMinutes name="songDurationMinutes" th:value="${song.durationMinutes}"/><br>
+                <label for="songDurationSeconds">Song duration seconds:</label><br>
+                <input type="text" id=songDurationSeconds name="songDurationSeconds" th:value="${song.durationSeconds}"/><br>
+                <input type="submit" value="Edit"/>
+            </form>
+        </div>
+
+        <div th:insert="fragments/footer :: footer"></div>
+    </div>
+</section>
+</body>
+</html>

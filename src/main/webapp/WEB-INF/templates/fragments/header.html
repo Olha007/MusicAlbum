@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Header</title>
-  <link rel="stylesheet" type="text/css" media="all" href="../../css/style.css" th:href="@{/css/style.css}" />
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <link type="text/css" media="all" href="css/home.css" rel="stylesheet" th:href="@{/css/home.css}"/>
 </head>
 <body>
 <header th:fragment="header">
-  <img src="../../images/logo.png" th:src="@{/images/logo.png}" alt="logo" width="100" height="100">
-  <h1>MusicAlbum</h1>
-  <ul>
-    <li><a href="home.html" th:href="@{HomeServlet}">Home</a></li>
-  </ul>
-  <form class="header-form"
-        role="form" action="LoginServlet" method="post">
-    <input type="hidden" name="action"
-           id="action" value="logout"/>
-    <button type="submit">Logout</button>
-  </form>
+    <h1>MusicAlbum</h1>
+    <ul>
+        <li><a th:href="@{/HomeServlet}">Home</a></li>
+        <li><a th:href="@{/GenresServlet}">Genres</a></li>
+        <li><a th:href="@{/ArtistsServlet}">Artists</a></li>
+        <li><a th:href="@{/GroupsServlet}">Groups</a></li>
+        <li><a th:href="@{/SongsServlet}">Songs</a></li>
+    </ul>
+    <form class="header-form"
+          role="form" action="LoginServlet" method="post">
+        <input type="hidden" name="action"
+               id="action" value="logout"/>
+        <button type="submit">Logout</button>
+    </form>
 </header>
 </body>
 </html>

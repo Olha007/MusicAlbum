@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Songs</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/home.css" th:href="@{/css/home.css}"/>
+</head>
+<body>
+<section id="musicAlbum">
+    <div class="container">
+        <div th:insert="fragments/header :: header"></div>
+
+        <div class="tables">
+            <table border="1">
+                <caption>Songs:</caption>
+                <tr>
+                    <th>Song id</th>
+                    <th>Song name</th>
+                    <th>Duration minutes</th>
+                    <th>Duration seconds</th>
+                    <th>Edit song</th>
+                    <th>Remove song</th>
+                </tr>
+                <tr th:each="song : ${songs}">
+                    <td th:utext="${song.id}">songtId</td>
+                    <td th:utext="${song.name}">songName</td>
+                    <td th:utext="${song.durationMinutes}">songDurationMinutes</td>
+                    <td th:utext="${song.durationSeconds}">songDurationSeconds</td>
+                    <td>
+                        <form th:action="@{/SongEditServlet}" method="post">
+                            <input type="hidden" name="action"
+                                   value="songEdit"/>
+                            <input type="hidden" name="songId"
+                                   th:value="${song.id}"/>
+                            <input type="submit" value="Edit"/>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/SongsServlet}" method="post">
+                            <input type="hidden" name="action"
+                                   value="songRemove"/>
+                            <input type="hidden" name="songId"
+                                   th:value="${song.id}"/>
+                            <input type="submit" value="Remove"/>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+
+            <p><a href="songadd.html" th:href="@{/SongAddServlet}">Add song</a></p>
+
+            <div th:insert="fragments/footer :: footer"></div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

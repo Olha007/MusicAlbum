@@ -45,7 +45,7 @@ public class SongsServlet extends HttpServlet {
                 song.setSongName(songName);
                 int durationMinutes = Integer.parseInt(request.getParameter("durationMinutes"));
                 song.setDurationMinutes(durationMinutes);
-                Long durationSeconds = Long.parseLong(request.getParameter("durationSeconds"));
+                int durationSeconds = Integer.parseInt(request.getParameter("durationSeconds"));
                 song.setDurationSeconds(durationSeconds);
                 songDao.update(song);
             }

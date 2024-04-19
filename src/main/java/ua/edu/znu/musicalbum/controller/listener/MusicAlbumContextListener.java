@@ -13,7 +13,6 @@ public class MusicAlbumContextListener implements ServletContextListener {
     private GenreDaoImpl genreDao;
     private GroupDaoImpl groupDao;
     private SongDaoImpl songDao;
-
     private UserDaoImpl userDao;
 
     @Override

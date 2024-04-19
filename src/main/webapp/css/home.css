@@ -7,34 +7,75 @@ body {
     background-size: cover;
 }
 
+
+header {
+    background-color: rgba(245, 233, 10, 0.98);
+    color: rgba(21, 21, 21, 0.87);
+    padding: 10px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+header ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+header ul li a {
+    color: rgba(21, 21, 21, 0.87);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+header ul li a:hover {
+    text-decoration: underline;
+}
+
+#musicAlbum h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3em;
+    font-weight: 350;
+    text-shadow: 2px 2px 4px rgb(69, 123, 157);
+    margin: 0;
+}
+
+.header-form {
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    margin: 0;
+}
+
+.header-form button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.header-form button:hover {
+    background-color: #45a049;
+}
+
 .container {
     width: 80%;
     margin: 0 auto;
     overflow: hidden;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 2rem;
-}
-
-/* Стилі заголовка */
-header.login {
-    text-align: center;
-    padding: 1px;
-    background-color: rgba(245, 233, 10, 0.98);
-    color: rgba(21, 21, 21, 0.87);
-}
-
-#musicAlbum h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 3em;
-    font-weight: 550;
-    text-shadow: 2px 2px 4px rgb(69, 123, 157);
-    margin: 0;
-}
 
 table {
     width: 100%;
@@ -54,7 +95,7 @@ table th, table td {
 
 table th {
     background-color: rgba(245, 233, 10, 0.98);
-    font-family: 'Arial', Sana;
+    font-family: 'Arial', sans-serif;
     color: rgba(21, 21, 21, 0.87);
 }
 
@@ -68,5 +109,12 @@ footer {
     width: 100%;
     text-align: center;
     font-size: 11px;
-    font-weight: 8;
+    font-weight: bold;
 }
+
+
+
+
+
+
+

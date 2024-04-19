@@ -25,7 +25,7 @@ public class UserDaoImpl extends MusicAlbumDaoImpl<User> {
 
     public boolean isAuthenticated(final String username, final String password) {
         User user = findByUsername(username);
-        if(user == null){
+        if (user == null) {
             throw new NoResultException();
         }
         return password.equals(user.getPassword());
