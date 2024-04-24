@@ -13,7 +13,7 @@
 
         <div class="tables">
             <table border="1">
-                <caption>Groups:</caption>
+                <caption>Groups</caption>
                 <tr>
                     <th>Group id</th>
                     <th>Group name</th>
@@ -22,7 +22,7 @@
                 </tr>
                 <tr th:each="group : ${groups}">
                     <td th:utext="${group.id}">groupId</td>
-                    <td th:utext="${group.name}">groupName</td>
+                    <td th:utext="${group.groupName}">groupName</td>
                     <td>
                         <form th:action="@{/GroupEditServlet}" method="post">
                             <input type="hidden" name="action"
@@ -43,9 +43,7 @@
                     </td>
                 </tr>
             </table>
-
-            <p><a href="groupadd.html" th:href="@{/GroupAddServlet}">Add group</a></p>
-
+            <a href="groupadd.html" th:href="@{/GroupAddServlet}" class="add-link">Add group</a>
             <div th:insert="fragments/footer :: footer"></div>
         </div>
     </div>

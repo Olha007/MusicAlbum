@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Artist</title>
+    <title>Add Album</title>
     <link rel="stylesheet" type="text/css" media="all" href="../../css/home.css" th:href="@{/css/home.css}"/>
 </head>
 <section id="musicAlbum">
@@ -11,12 +11,11 @@
         <div th:insert="fragments/header :: header"></div>
 
         <div class="addeditentity">
-<!--            <p>Add new artist:</p>-->
-            <form th:action="@{/ArtistAddServlet}" method="post">
-                <label for="artistFirstName">Artist First Name:</label><br>
-                <input type="text" id="artistFirstName" name="artistFirstName" /><br>
-                <label for="artistLastName">Artist Last Name:</label><br>
-                <input type="text" id="artistLastName" name="artistLastName" /><br>
+            <form th:action="@{/AlbumAddServlet}" method="post">
+                <label for="albumName">Album name:</label><br>
+                <input type="text" id="albumName" name="albumName" /><br>
+                <label for="releaseYear">Release Year:</label><br>
+                <input type="text" id="releaseYear" name="releaseYear" /><br>
                 <input type="submit" value="Add"/>
             </form>
         </div>

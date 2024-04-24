@@ -9,20 +9,18 @@
 <section id="musicAlbum">
   <div class="container">
     <div th:insert="fragments/header :: header">
-      <h1>Music Album</h1>
+      <h1>Music Albums</h1>
     </div>
-
     <div class="content">
       <div class="tables">
         <table border="1">
-          <caption>Albums:</caption>
           <tr>
-            <th>Album name</th>
+            <th>Album names</th>
             <th>Genres</th>
             <th>Release year</th>
             <th>Artists</th>
-            <th>Group</th>
-            <th>View Details</th>
+            <th>Groups</th>
+            <th>Details</th>
           </tr>
           <tr th:each="album : ${musicAlbumDTOS}">
             <td th:text="${album.albumName}">Album name</td>
@@ -33,8 +31,8 @@
             <td th:text="${album.artistName}">Artist</td>
             <td th:text="${album.groupName}">Group</td>
             <td>
-              <form th:action="@{/MusicAlbumDetailServlet}" method="post">
-                <input type="hidden" name="action" value="viewDetails"/>
+              <form th:action="@{/AlbumAssigmentServlet}" method="post">
+                <input type="hidden" name="detail" value="Details"/>
                 <input type="hidden" name="albumId" th:value="${album.id}"/>
                 <button type="submit">Details</button>
               </form>
@@ -44,9 +42,11 @@
       </div>
     </div>
     <footer>
-      <h3>Music Album &copy; 2023-2024</h3>
+      <h3>Music Albums &copy; 2023-2024</h3>
     </footer>
   </div>
 </section>
 </body>
 </html>
+
+

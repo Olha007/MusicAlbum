@@ -13,7 +13,7 @@
 
         <div class="tables">
             <table border="1">
-                <caption>Artists:</caption>
+                <caption>Artists</caption>
                 <tr>
                     <th>Artist id</th>
                     <th>Artist first name</th>
@@ -46,7 +46,7 @@
                 </tr>
             </table>
 
-            <p><a href="artistadd.html" th:href="@{/ArtistAddServlet}">Add artist</a></p>
+            <a href="artistadd.html" th:href="@{/ArtistAddServlet}" class="add-link">Add artist</a>
 
             <div th:insert="fragments/footer :: footer"></div>
         </div>

@@ -11,14 +11,14 @@
         <div th:insert="fragments/header :: header"></div>
 
         <div class="addeditentity">
-            <p>Add new song:</p>
+<!--            <p>Add new song:</p>-->
             <form th:action="@{/SongAddServlet}" method="post">
                 <label for="songName">Song Name:</label><br>
                 <input type="text" id="songName" name="songName" /><br>
-                <label for="songDurationMinutes">Song Duration Minutes:</label><br>
-                <input type="text" id="songDurationMinutes" name="songDurationMinutes" /><br>
-                <label for="songDurationSeconds">Song Duration Seconds:</label><br>
-                <input type="text" id="songDurationSeconds" name="songDurationSeconds" /><br>
+                <label for="durationMinutes">Duration Minutes:</label><br>
+                <input type="text" id="durationMinutes" name="durationMinutes" /><br>
+                <label for="durationSeconds">Duration Seconds:</label><br>
+                <input type="text" id="durationSeconds" name="durationSeconds" /><br>
                 <input type="submit" value="Add"/>
             </form>
         </div>

@@ -17,10 +17,10 @@ public class Song {
     @Column(name = "song_id", nullable = false)
     private Long id;
 
-    @Column(name = "song_name")
+    @Column(name = "song_name", nullable = false)
     private String songName;
 
-    @Column(name = "duration_minutes")
+    @Column(name = "duration_minutes", nullable = false)
     private Integer durationMinutes;
 
     @Column(name = "duration_seconds")
@@ -36,4 +36,5 @@ public class Song {
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "songs", cascade = CascadeType.PERSIST)
     private Set<Album> albums = new LinkedHashSet<>();
+
 }

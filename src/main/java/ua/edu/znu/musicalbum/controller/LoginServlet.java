@@ -17,9 +17,6 @@ import java.io.IOException;
  */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
-
-//TODO Try @ServletSecurity servlet annotation instead of login form.
-
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -29,7 +26,9 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws IOException {
-        doPost(request, response);
+        String nextUrl = "login";
+        request.setAttribute("nextUrl", nextUrl);
+//        doPost(request, response);
     }
 
     @Override

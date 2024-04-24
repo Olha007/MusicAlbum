@@ -47,7 +47,7 @@ CREATE TABLE AlbumArtistGroup
     PRIMARY KEY (artist_id, album_id, group_id),
     FOREIGN KEY (artist_id) REFERENCES Artists (artist_id),
     FOREIGN KEY (album_id) REFERENCES Albums (album_id),
-    FOREIGN KEY (group_id) REFERENCES Groups (group_id)
+    FOREIGN KEY (group_id) REFERENCES "Groups" (group_id)
 ) engine = InnoDB;
 
 CREATE TABLE Users

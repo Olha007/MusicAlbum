@@ -15,7 +15,8 @@ import ua.edu.znu.musicalbum.model.User;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/HomeServlet", "/AlbumAssignmentServlet",
+@WebFilter(urlPatterns = {"/HomeServlet", "/AlbumAssigmentServlet",
+        "/AlbumsServlet", "/AlbumAddServlet", "/AlbumEditServlet",
         "/GenresServlet", "/GenreAddServlet", "/GenreEditServlet",
         "/ArtistsServlet", "/ArtistAddServlet", "/ArtistEditServlet",
         "/GroupsServlet", "/GroupAddServlet", "/GroupEditServlet",

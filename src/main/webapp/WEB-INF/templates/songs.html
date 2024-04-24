@@ -10,10 +10,9 @@
 <section id="musicAlbum">
     <div class="container">
         <div th:insert="fragments/header :: header"></div>
-
         <div class="tables">
             <table border="1">
-                <caption>Songs:</caption>
+                <caption>Songs</caption>
                 <tr>
                     <th>Song id</th>
                     <th>Song name</th>
@@ -23,10 +22,10 @@
                     <th>Remove song</th>
                 </tr>
                 <tr th:each="song : ${songs}">
-                    <td th:utext="${song.id}">songtId</td>
-                    <td th:utext="${song.name}">songName</td>
-                    <td th:utext="${song.durationMinutes}">songDurationMinutes</td>
-                    <td th:utext="${song.durationSeconds}">songDurationSeconds</td>
+                    <td th:utext="${song.id}">songId</td>
+                    <td th:utext="${song.songName}">songName</td>
+                    <td th:utext="${song.durationMinutes}">durationMinutes</td>
+                    <td th:utext="${song.durationSeconds}">durationMinutes</td>
                     <td>
                         <form th:action="@{/SongEditServlet}" method="post">
                             <input type="hidden" name="action"
@@ -48,7 +47,7 @@
                 </tr>
             </table>
 
-            <p><a href="songadd.html" th:href="@{/SongAddServlet}">Add song</a></p>
+            <a href="songadd.html" th:href="@{/SongAddServlet}" class="add-link">Add song</a>
 
             <div th:insert="fragments/footer :: footer"></div>
         </div>

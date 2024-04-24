@@ -43,6 +43,8 @@ public class AlbumsServlet extends HttpServlet {
             case "albumEdit" -> {
                 String albumName = request.getParameter("albumName");
                 album.setAlbumName(albumName);
+                Integer releaseYear = Integer.valueOf(request.getParameter("releaseYear"));
+                album.setReleaseYear(releaseYear);
                 albumDao.update(album);
             }
             case "albumRemove" -> {

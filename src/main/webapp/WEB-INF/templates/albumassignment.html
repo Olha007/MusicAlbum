@@ -1,145 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Album Details</title>
-    <link rel="stylesheet" type="text/css" media="all" href="../../css/albumedit.css" th:href="@{/css/albumedit.css}"/>
+    <title>Edit Album</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/style.css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-
 <section id="musicAlbum">
     <div class="container">
-        <div th:insert="fragments/header :: header"></div>
 
-        <div class="editAlbumDetails">
-            <table border="1">
-                <caption>Edit Album Details:</caption>
-                <tr>
-                    <th>Album ID</th>
-                    <th>Album Name</th>
-                    <th>Release Year</th>
-                    <th>Update Details</th>
-                </tr>
-                <tr>
-                    <td th:text="${album.id}">AlbumID</td>
-                    <td><input type="text" name="albumName" th:value="${album.name}"></td>
-                    <td><input type="number" name="releaseYear" th:value="${album.releaseYear}"></td>
-                    <td>
-                        <form th:action="@{/UpdateAlbumDetailsServlet}" method="post">
-                            <input type="hidden" name="albumId" th:value="${album.id}"/>
-                            <input type="submit" value="Update Album"/>
-                        </form>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="assignArtist">
-            <table border="1">
-                <caption>Assign Artist to Album:</caption>
-                <tr>
-                    <th>Select New Artist</th>
-                    <th>Assign Artist</th>
-                </tr>
-                <tr>
-                    <td>
-                        <select id="selectedArtist" name="selectedArtist">
-                            <option value="0">Select new artist</option>
-                            <option th:each="artist : ${otherArtists}" th:value="${artist.id}"
-                                    th:text="${artist.name}"></option>
-                        </select>
-                    </td>
-                    <td>
-                        <form th:action="@{/AlbumAssignmentServlet}" method="post">
-                            <input type="hidden" name="action" value="artistAssign"/>
-                            <input type="hidden" name="albumId" th:value="${album.id}"/>
-                            <input type="submit" value="Assign"/>
-                        </form>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="assignGroup">
-            <table border="1">
-                <caption>Assign Group to Album:</caption>
-                <tr>
-                    <th>Select New Group</th>
-                    <th>Assign Group</th>
-                </tr>
-                <tr>
-                    <td>
-                        <select id="selectedGroup" name="selectedGroup">
-                            <option value="0">Select new group</option>
-                            <option th:each="group : ${otherGroups}" th:value="${group.group_id}"
-                                    th:text="${group.group_name}"></option>
-                        </select>
-                    </td>
-                    <td>
-                        <form th:action="@{/AlbumAssignmentServlet}" method="post">
-                            <input type="hidden" name="action" value="groupAssign"/>
-                            <input type="hidden" name="albumId" th:value="${album.id}"/>
-                            <input type="submit" value="Assign"/>
-                        </form>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="selectGenres">
-            <table border="1">
-                <caption>Add Genre to Album:</caption>
-                <tr>
-                    <th>Select Genre</th>
-                    <th>Add Genre</th>
-                </tr>
-                <tr>
-                    <td>
-                        <select name="selectedGenre">
-                            <option value="0">Select genre</option>
-                            <option th:each="genre : ${otherGenres}" th:value="${genre.id}"
-                                    th:text="${genre.name}"></option>
-                        </select>
-                    </td>
-                    <td>
-                        <form th:action="@{/AlbumAssignmentServlet}" method="post">
-                            <input type="hidden" name="action" value="genreAssign"/>
-                            <input type="hidden" name="albumId" th:value="${album.id}"/>
-                            <input type="submit" value="Assign"/>
-                        </form>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div class="albumSongs">
-        <table border="1">
-            <caption>Songs in Album:</caption>
-            <tr>
-                <th>Song ID</th>
-                <th>Song Name</th>
-                <th>Duration Minutes</th>
-                <th>Duration Seconds</th>
-                <th>Edit Song</th>
-            </tr>
-            <tr th:each="song : ${album.songs}">
-                <td th:text="${song.song_id}">SongID</td>
-                <td><input type="text" th:value="${song.songName}" th:name="'songName' + ${song.songId}"/></td>
-                <td><input type="number" min="0" th:value="${song.duration_minutes}"
-                           th:name="'durationMinutes' + ${song.songId}"/></td>
-                <td><input type="number" min="0" max="59" th:value="${song.durationSeconds}"
-                           th:name="'durationSeconds' + ${song.songId}"/></td>
-                <td>
-                    <form th:action="@{/EditSongDetailsServlet}" method="post">
-                        <input type="hidden" th:value="${song.songId}" name="songId"/>
-                        <input type="hidden" th:value="${album.id}" name="albumId"/>
-                        <button type="submit">Update</button>
-                    </form>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div th:insert="fragments/footer :: footer"></div>
     </div>
 </section>
 </body>
 </html>
-

@@ -20,12 +20,14 @@ import ua.edu.znu.musicalbum.controller.listener.ThymeleafConfigurationListener;
 import java.io.IOException;
 import java.util.Enumeration;
 
-@WebFilter(urlPatterns = {"/LoginServlet", "/HomeServlet",
+@WebFilter(urlPatterns = {"/LoginServlet", "/HomeServlet","/AlbumAssigmentServlet",
+        "/AlbumsServlet", "/AlbumAddServlet", "/AlbumEditServlet",
         "/GenresServlet", "/GenreAddServlet", "/GenreEditServlet",
         "/ArtistsServlet", "/ArtistAddServlet", "/ArtistEditServlet",
         "/GroupsServlet", "/GroupAddServlet", "/GroupEditServlet",
         "/SongsServlet", "/SongAddServlet", "/SongEditServlet",
-        "/AlbumAssignmentServlet"},
+        "/RegistrationServlet",
+},
 
         dispatcherTypes = {DispatcherType.FORWARD, DispatcherType.REQUEST})
 public class ThymeleafFilter implements Filter {
@@ -48,7 +50,6 @@ public class ThymeleafFilter implements Filter {
 
         WebContext context = getWebContext(req, resp);
 
-        // Встановити атрибути запиту як змінні в контексті Thymeleaf
         Enumeration<String> params = req.getAttributeNames();
         while (params.hasMoreElements()) {
             String param = params.nextElement();

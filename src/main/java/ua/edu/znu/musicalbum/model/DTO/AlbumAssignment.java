@@ -5,7 +5,7 @@ import lombok.Data;
  * Used in the {@link ua.edu.znu.musicalbum.controller.HomeServlet}.
  */
 @Data
-public class MusicAlbumDTO {
+public class AlbumAssignment {
     private Long id;
     private String albumName;
     private String genres;

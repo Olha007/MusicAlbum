@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Artists</title>
+    <title>Genres</title>
     <link rel="stylesheet" type="text/css" media="all" href="../../css/home.css" th:href="@{/css/home.css}"/>
 </head>
 <body>
@@ -13,7 +13,7 @@
 
         <div class="tables">
             <table border="1">
-                <caption>Genres:</caption>
+                <caption>Genres</caption>
                 <tr>
                     <th>Genre id</th>
                     <th>Genre name</th>
@@ -44,8 +44,8 @@
                 </tr>
             </table>
 
-            <p><a href="genreadd.html" th:href="@{/GenreAddServlet}">Add genre</a></p>
-
+<!--            <p><a href="genreadd.html" th:href="@{/GenreAddServlet}">Add genre</a></p>-->
+            <a href="genreadd.html" th:href="@{/GenreAddServlet}" class="add-link">Add genre</a>
             <div th:insert="fragments/footer :: footer"></div>
         </div>
     </div>

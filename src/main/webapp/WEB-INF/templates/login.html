@@ -12,8 +12,12 @@
 <section id="musicAlbum">
     <div class="container">
         <header class="login">
-            <h1 style="margin-left: 100px;">Music Album</h1>
+            <h1 style="margin-left: 100px;">Music Albums</h1>
         </header>
+        <blockquote class="center-right">
+            <p>"Where words fail</p>
+            <p>music speaks"</p>
+        </blockquote>
         <div class="content">
             <div class="companyname">
             </div>
@@ -25,14 +29,15 @@
                     <p><input type="submit" value="Login" style="float: left"/></p>
                 </form>
             </div>
-            <br/>
             <h3 th:text="${message}" class="loginmessage"></h3>
         </div>
+        <div class="registration">
+            <a href="RegistrationServlet" th:href="@{/RegistrationServlet}" class="registration-link">Registration</a>
+        </div>
         <footer>
-            <h3>Music album &copy; 2023-2024</h3>
+            <h3>Music albums &copy; 2023-2024</h3>
         </footer>
     </div>
 </section>
 </body>
 </html>
-

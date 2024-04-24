@@ -16,7 +16,7 @@ public class Genre {
     private Long id;
 
 
-    @Column(name = "genre_name")
+    @Column(name = "genre_name", nullable = false)
     private String name;
 
     @ToString.Exclude

@@ -13,6 +13,6 @@ public class Group {
     @Column(name = "group_id", nullable = false)
     private Long id;
 
-    @Column(name = "group_name")
+    @Column(name = "group_name", nullable = false)
     private String groupName;
 }

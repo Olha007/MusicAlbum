@@ -6,13 +6,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import ua.edu.znu.musicalbum.model.Artist;
-import ua.edu.znu.musicalbum.service.ArtistDaoImpl;
+import ua.edu.znu.musicalbum.model.Album;
+import ua.edu.znu.musicalbum.service.AlbumDaoImpl;
 
 import java.io.IOException;
 
-@WebServlet("/ArtistAddServlet")
-public class ArtistAddServlet extends HttpServlet {
+@WebServlet("/AlbumAddServlet")
+public class AlbumAddServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -22,7 +22,7 @@ public class ArtistAddServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) {
-        String nextUrl = "artistadd";
+        String nextUrl = "albumadd";
         request.setAttribute("nextUrl", nextUrl);
     }
 
@@ -30,16 +30,16 @@ public class ArtistAddServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws IOException, ServletException {
-        ArtistDaoImpl artistDao = (ArtistDaoImpl) getServletContext().getAttribute("artistDao");
-        Artist artist  = new Artist();
-        String artistFirstName = request.getParameter("artistFirstName");
-        artist.setFirstName(artistFirstName);
-        String artistLastName = request.getParameter("artistLastName");
-        artist.setLastName(artistLastName);
-        artistDao.create(artist);
+        AlbumDaoImpl albumDao = (AlbumDaoImpl) getServletContext().getAttribute("albumDao");
+        Album album = new Album();
+        String albumName = request.getParameter("albumName");
+        album.setAlbumName(albumName);
+        Integer releaseYear = Integer.valueOf(request.getParameter("releaseYear"));
+        album.setReleaseYear(releaseYear);
+        albumDao.create(album);
 
-        String nextUrl = "artists";
+        String nextUrl = "albums";
         request.setAttribute("nextUrl", nextUrl);
-        response.sendRedirect(request.getContextPath() + "/ArtistsServlet");
+        response.sendRedirect(request.getContextPath() + "/AlbumsServlet");
     }
 }

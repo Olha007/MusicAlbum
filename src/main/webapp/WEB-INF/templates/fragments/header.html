@@ -7,19 +7,18 @@
 </head>
 <body>
 <header th:fragment="header">
-    <h1>MusicAlbum</h1>
+    <h1>Music Albums</h1>
     <ul>
         <li><a th:href="@{/HomeServlet}">Home</a></li>
+        <li><a th:href="@{/AlbumsServlet}">Albums</a></li>
         <li><a th:href="@{/GenresServlet}">Genres</a></li>
         <li><a th:href="@{/ArtistsServlet}">Artists</a></li>
         <li><a th:href="@{/GroupsServlet}">Groups</a></li>
         <li><a th:href="@{/SongsServlet}">Songs</a></li>
     </ul>
-    <form class="header-form"
-          role="form" action="LoginServlet" method="post">
-        <input type="hidden" name="action"
-               id="action" value="logout"/>
-        <button type="submit">Logout</button>
+    <form class="header-form" role="form" action="LoginServlet" method="post">
+        <input type="hidden" name="action" value="logout"/>
+        <button type="submit" class="logout-link">Logout</button>
     </form>
 </header>
 </body>

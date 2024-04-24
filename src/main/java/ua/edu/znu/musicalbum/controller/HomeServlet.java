@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import ua.edu.znu.musicalbum.model.Album;
 import ua.edu.znu.musicalbum.model.AlbumArtistGroup;
 import ua.edu.znu.musicalbum.model.Artist;
-import ua.edu.znu.musicalbum.model.DTO.MusicAlbumDTO;
+import ua.edu.znu.musicalbum.model.DTO.AlbumAssignment;
 import ua.edu.znu.musicalbum.model.Song;
 import ua.edu.znu.musicalbum.service.AlbumDaoImpl;
 
@@ -38,9 +38,9 @@ public class HomeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         AlbumDaoImpl albumDao = (AlbumDaoImpl) getServletContext().getAttribute("albumDao");
         List<Album> albums = albumDao.findAll();
-        List<MusicAlbumDTO> musicAlbumDTOS = new ArrayList<>();
+        List<AlbumAssignment> musicAlbumDTOS = new ArrayList<>();
         for (Album album : albums) {
-            MusicAlbumDTO musicAlbumDTO = new MusicAlbumDTO();
+            AlbumAssignment musicAlbumDTO = new AlbumAssignment();
             musicAlbumDTO.setId(album.getId());
             musicAlbumDTO.setAlbumName(album.getAlbumName());
             Set<Song> songs = album.getSongs();
