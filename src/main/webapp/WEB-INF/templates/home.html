@@ -32,7 +32,7 @@
             <td th:text="${album.groupName}">Group</td>
             <td>
               <form th:action="@{/AlbumAssigmentServlet}" method="post">
-                <input type="hidden" name="detail" value="Details"/>
+                <input type="hidden" name="action" value="albumSelect"/>
                 <input type="hidden" name="albumId" th:value="${album.id}"/>
                 <button type="submit">Details</button>
               </form>

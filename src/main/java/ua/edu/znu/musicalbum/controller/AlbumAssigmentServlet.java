@@ -11,6 +11,7 @@ import ua.edu.znu.musicalbum.service.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 @WebServlet("/AlbumAssigmentServlet")
 public class AlbumAssigmentServlet extends HttpServlet {
@@ -30,19 +31,23 @@ public class AlbumAssigmentServlet extends HttpServlet {
 
         AlbumDaoImpl albumDao = (AlbumDaoImpl) getServletContext().getAttribute("albumDao");
         SongDaoImpl songDao = (SongDaoImpl) getServletContext().getAttribute("songDao");
-        GenreDaoImpl genreDao = (GenreDaoImpl) getServletContext().getAttribute("genreDao");
+//        GenreDaoImpl genreDao = (GenreDaoImpl) getServletContext().getAttribute("genreDao");
         ArtistDaoImpl artistDao = (ArtistDaoImpl) getServletContext().getAttribute("artistDao");
         GroupDaoImpl groupDao = (GroupDaoImpl) getServletContext().getAttribute("groupDao");
+
         Album album = albumDao.findById(albumId);
 
         switch (action) {
-            case "updateAlbum" -> {
-                String albumName = request.getParameter("albumName");
-                int releaseYear = Integer.parseInt(request.getParameter("releaseYear"));
-                album.setAlbumName(albumName);
-                album.setReleaseYear(releaseYear);
-                albumDao.update(album);
+            case "albumSelect" -> {
+
             }
+//            case "updateAlbum" -> {
+//                String albumName = request.getParameter("albumName");
+//                int releaseYear = Integer.parseInt(request.getParameter("releaseYear"));
+//                album.setAlbumName(albumName);
+//                album.setReleaseYear(releaseYear);
+//                albumDao.update(album);
+//            }
             case "addSong" -> {
                 Long songId = Long.valueOf(request.getParameter("selectedSong"));
                 Song song = songDao.findById(songId);
@@ -54,14 +59,14 @@ public class AlbumAssigmentServlet extends HttpServlet {
                 album.removeSong(songId);
                 albumDao.update(album);
             }
-            case "changeGenre" -> {
-                Long songId = Long.valueOf(request.getParameter("songId"));
-                Long genreId = Long.valueOf(request.getParameter("selectedGenre"));
-                Song song = songDao.findById(songId);
-                Genre genre = genreDao.findById(genreId);
-                song.setGenre(genre);
-                songDao.update(song);
-            }
+//            case "changeGenre" -> {
+//                Long songId = Long.valueOf(request.getParameter("songId"));
+//                Long genreId = Long.valueOf(request.getParameter("selectedGenre"));
+//                Song song = songDao.findById(songId);
+//                Genre genre = genreDao.findById(genreId);
+//                song.setGenre(genre);
+//                songDao.update(song);
+//            }
             case "assignArtist" -> {
                 Long artistId = Long.valueOf(request.getParameter("selectedArtist"));
                 Artist artist = artistDao.findById(artistId);
@@ -76,17 +81,32 @@ public class AlbumAssigmentServlet extends HttpServlet {
             }
         }
 
-        album = albumDao.findById(albumId);
+//        album = albumDao.findById(albumId);
         List<Song> availableSongs = songDao.findAll();
-        List<Genre> availableGenres = genreDao.findAll();
-        List<Artist> availableArtists = artistDao.findAll();
-        List<Group> availableGroups = groupDao.findAll();
+        Set<Song> albumSongs = album.getSongs();
+        availableSongs.removeAll(albumSongs);
 
+//        List<Genre> availableGenres = genreDao.findAll();
+
+        List<Artist> availableArtists = artistDao.findAll();
+        List<Artist> albumArtists = album.getAlbumArtistGroups().stream()
+                .map(AlbumArtistGroup::getArtist)
+                .toList();
+        availableArtists.removeAll(albumArtists);
+
+        List<Group> availableGroups = groupDao.findAll();
+        List<Group> albumGroups = album.getAlbumArtistGroups().stream()
+                .map(AlbumArtistGroup::getGroup)
+                .toList();
+        availableGroups.removeAll(albumGroups);
+
+        String nextUrl = "albumassignment";
         request.setAttribute("album", album);
         request.setAttribute("availableSongs", availableSongs);
-        request.setAttribute("availableGenres", availableGenres);
+//        request.setAttribute("availableGenres", availableGenres);
         request.setAttribute("availableArtists", availableArtists);
         request.setAttribute("availableGroups", availableGroups);
+        request.setAttribute("nextUrl", nextUrl);
 
         response.setContentType("text/html;charset=UTF-8");
     }
