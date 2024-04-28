@@ -31,7 +31,7 @@
             <td th:text="${album.artistName}">Artist</td>
             <td th:text="${album.groupName}">Group</td>
             <td>
-              <form th:action="@{/AlbumAssigmentServlet}" method="post">
+              <form th:action="@{/AlbumAssignmentServlet}" method="post">
                 <input type="hidden" name="action" value="albumSelect"/>
                 <input type="hidden" name="albumId" th:value="${album.id}"/>
                 <button type="submit">Details</button>

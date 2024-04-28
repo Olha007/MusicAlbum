@@ -20,7 +20,7 @@ import ua.edu.znu.musicalbum.controller.listener.ThymeleafConfigurationListener;
 import java.io.IOException;
 import java.util.Enumeration;
 
-@WebFilter(urlPatterns = {"/LoginServlet", "/HomeServlet","/AlbumAssigmentServlet",
+@WebFilter(urlPatterns = {"/LoginServlet", "/HomeServlet","/AlbumAssignmentServlet",
         "/AlbumsServlet", "/AlbumAddServlet", "/AlbumEditServlet",
         "/GenresServlet", "/GenreAddServlet", "/GenreEditServlet",
         "/ArtistsServlet", "/ArtistAddServlet", "/ArtistEditServlet",
