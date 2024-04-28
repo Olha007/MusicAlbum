@@ -4,12 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Album</title>
-    <link rel="stylesheet" type="text/css" media="all" href="../../css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/home.css" th:href="@{/css/home.css}"/>
 </head>
 <body>
 <section id="musicAlbum">
     <div class="container">
-
+        <div th:insert="fragments/header :: header"></div>
+        <div class="tables">
+            <div class="selectartists">
+                <table border="1">
+                    <caption>Album artists:</caption>
+                    <tr>
+                        <th>Album artists</th>
+                        <th>Add album artist</th>
+                        <th>Remove album artist</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <th:block th:each="artist : ${albumArtists}" th:text="${artist}"></th:block>
+                        </td>
+                        <td>
+                            <form th:action="@{/AlbumAssignmentServlet}" method="post">
+                                <select name="selectedArtist">
+                                    <option value="0">Select artist</option>
+                                    <option th:each="artist : ${otherArtists}" th:value="${artist.id}"
+                                            th:text="${artist}"></option>
+                                </select>
+                                <input type="hidden" name="action"
+                                       value="assignArtist"/>
+                                <input type="hidden" name="albumId"
+                                       th:value="${album.id}"/>
+                                <input type="submit" value="Assign"/>
+                            </form>
+                        </td>
+                        <td>
+                            <form th:action="@{/AlbumAssignmentServlet}" method="post">
+                                <select name="selectedArtist">
+                                    <option value="0">Select artist</option>
+                                    <option th:each="artist : ${albumArtists}" th:value="${artist.id}"
+                                            th:text="${artist}"></option>
+                                </select>
+                                <input type="hidden" name="action"
+                                       value="removeArtist"/>
+                                <input type="hidden" name="albumId"
+                                       th:value="${album.id}"/>
+                                <input type="submit" value="Remove"/>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div th:insert="fragments/footer :: footer"></div>
     </div>
 </section>
 </body>

@@ -30,35 +30,4 @@ public class Album {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Collection<AlbumArtistGroup> albumArtistGroups;
-
-
-
-
-
-
-    public void addSong(Song song) {
-        this.songs.add(song);
-    }
-
-    public void removeSong(Long songId) {
-        this.songs.removeIf(song -> song.getId().equals(songId));
-    }
-
-    public void assignArtist(Artist artist) {
-        AlbumArtistGroup aag = new AlbumArtistGroup();
-        aag.setAlbum(this);
-        aag.setArtist(artist);
-        this.albumArtistGroups.add(aag);
-    }
-
-    public void assignGroup(Group group) {
-        this.albumArtistGroups = this.albumArtistGroups.stream()
-                .filter(aag -> aag.getGroup() == null || !aag.getGroup().equals(group))
-                .collect(Collectors.toSet());
-
-        AlbumArtistGroup aag = new AlbumArtistGroup();
-        aag.setAlbum(this);
-        aag.setGroup(group);
-        this.albumArtistGroups.add(aag);
-    }
 }

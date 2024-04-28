@@ -1,15 +1,38 @@
 package ua.edu.znu.musicalbum.service;
 
-import ua.edu.znu.musicalbum.model.Album;
+import ua.edu.znu.musicalbum.model.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AlbumDaoImpl extends MusicAlbumDaoImpl<Album> {
 
     public AlbumDaoImpl() {
         setClazz(Album.class);
+    }
+
+    public void assignArtist(Long albumId, Long artistId) {
+        EntityManager entityManager = getEntityManager();
+        AlbumArtistGroup aag = new AlbumArtistGroup();
+        entityManager.getTransaction().begin();
+        Album album = entityManager.find(Album.class, albumId);
+        Artist artist = entityManager.find(Artist.class, artistId);
+        aag.setAlbum(album);
+        aag.setArtist(artist);
+
+        entityManager.persist(aag);
+        entityManager.getTransaction().commit();
+    }
+
+    public void removeArtist(Long albumId, Long artistId) {
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        Album album = entityManager.find(Album.class, albumId);
+        Artist artist = entityManager.find(Artist.class, artistId);
+        album.getAlbumArtistGroups().removeIf(aag -> aag.getArtist().equals(artist));
+        entityManager.getTransaction().commit();
     }
 
     public List<Album> findByAlbumName(final String albumName) {
@@ -36,6 +59,31 @@ public class AlbumDaoImpl extends MusicAlbumDaoImpl<Album> {
                 .setParameter("lastName", lastName);
         return query.getResultList();
     }
+
+
+/*
+    public void addSong(Song song) {
+        this.songs.add(song);
+    }
+
+    public void removeSong(Long songId) {
+        this.songs.removeIf(song -> song.getId().equals(songId));
+    }
+
+
+
+    public void assignGroup(Group group) {
+        this.albumArtistGroups = this.albumArtistGroups.stream()
+                .filter(aag -> aag.getGroup() == null || !aag.getGroup().equals(group))
+                .collect(Collectors.toSet());
+
+        AlbumArtistGroup aag = new AlbumArtistGroup();
+        aag.setAlbum(this);
+        aag.setGroup(group);
+        this.albumArtistGroups.add(aag);
+    }
+
+ */
 }
 
 
