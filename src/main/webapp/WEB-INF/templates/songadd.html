@@ -19,6 +19,12 @@
                 <input type="text" id="durationMinutes" name="durationMinutes" /><br>
                 <label for="durationSeconds">Duration Seconds:</label><br>
                 <input type="text" id="durationSeconds" name="durationSeconds" /><br>
+                <label for="selectedGenre">Genre:</label><br>
+                <select id="selectedGenre" name="selectedGenre">
+                    <option value="0">Select genre</option>
+                    <option th:each="genre : ${genres}" th:value="${genre.id}"
+                            th:text="${genre}"></option>
+                </select>
                 <input type="submit" value="Add"/>
             </form>
         </div>

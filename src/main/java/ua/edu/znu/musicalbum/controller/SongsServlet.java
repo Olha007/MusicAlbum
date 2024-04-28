@@ -6,7 +6,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import ua.edu.znu.musicalbum.model.Genre;
 import ua.edu.znu.musicalbum.model.Song;
+import ua.edu.znu.musicalbum.service.GenreDaoImpl;
 import ua.edu.znu.musicalbum.service.SongDaoImpl;
 
 import java.io.IOException;
@@ -37,6 +39,7 @@ public class SongsServlet extends HttpServlet {
             throws IOException {
         String action = request.getParameter("action");
         SongDaoImpl songDao = (SongDaoImpl) getServletContext().getAttribute("songDao");
+        GenreDaoImpl genreDao = (GenreDaoImpl) getServletContext().getAttribute("genreDao");
         long songId = Long.parseLong(request.getParameter("songId"));
         Song song = songDao.findById(songId);
         switch (action) {
@@ -47,6 +50,9 @@ public class SongsServlet extends HttpServlet {
                 song.setDurationMinutes(durationMinutes);
                 Integer durationSeconds = Integer.valueOf(request.getParameter("durationSeconds"));
                 song.setDurationSeconds(durationSeconds);
+                Long genreId = Long.valueOf(request.getParameter("selectedGenre"));
+                Genre songGenre = genreDao.findById(genreId);
+                song.setGenre(songGenre);
                 songDao.update(song);
             }
             case "songRemove" -> {
