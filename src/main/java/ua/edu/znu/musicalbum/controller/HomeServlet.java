@@ -44,6 +44,11 @@ public class HomeServlet extends HttpServlet {
             musicAlbumDTO.setId(album.getId());
             musicAlbumDTO.setAlbumName(album.getAlbumName());
             Set<Song> songs = album.getSongs();
+            StringBuilder songsNames = new StringBuilder();
+            for (Song song : songs) {
+                songsNames.append(song.getSongName()).append(", ");
+            }
+            musicAlbumDTO.setSongs(songsNames.toString());
             StringBuilder genres = new StringBuilder();
             for (Song song : songs) {
                 genres.append(song.getGenre().getName()).append(", ");

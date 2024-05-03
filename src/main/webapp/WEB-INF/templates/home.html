@@ -20,16 +20,18 @@
             <th>Release year</th>
             <th>Artists</th>
             <th>Groups</th>
+            <th>Songs</th>
             <th>Details</th>
           </tr>
           <tr th:each="album : ${musicAlbumDTOS}">
             <td th:text="${album.albumName}">Album name</td>
             <td>
-              <span th:each="genre : ${album.genres}" th:text="${genre}">Genre</span>
+              <span th:each="genre : ${album.genres}" th:text="${genre}">Genres</span>
             </td>
             <td th:text="${album.releaseYear}">Release year</td>
             <td th:text="${album.artistName}">Artist</td>
             <td th:text="${album.groupName}">Group</td>
+            <td th:text="${album.songs}">Songs</td>
             <td>
               <form th:action="@{/AlbumAssignmentServlet}" method="post">
                 <input type="hidden" name="action" value="albumSelect"/>
