@@ -1,5 +1,6 @@
 package ua.edu.znu.musicalbum.model.DTO;
 import lombok.Data;
+
 /**
  * DTO for displaying album information on the home page.
  * Used in the {@link ua.edu.znu.musicalbum.controller.HomeServlet}.
@@ -12,6 +13,7 @@ public class AlbumAssignment {
     private Integer releaseYear;
     private String artistName;
     private String groupName;
+    private String songs;
 }
 
 

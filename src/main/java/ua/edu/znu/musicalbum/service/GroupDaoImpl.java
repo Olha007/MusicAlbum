@@ -1,15 +1,45 @@
 package ua.edu.znu.musicalbum.service;
 
+import ua.edu.znu.musicalbum.model.Album;
+import ua.edu.znu.musicalbum.model.AlbumArtistGroup;
 import ua.edu.znu.musicalbum.model.Group;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.Collection;
 import java.util.List;
 
 public class GroupDaoImpl extends MusicAlbumDaoImpl<Group> {
 
     public GroupDaoImpl() {
         setClazz(Group.class);
+    }
+
+    public void assignGroup(Long albumId, Long groupId) {
+        EntityManager entityManager = getEntityManager();
+        AlbumArtistGroup aag = new AlbumArtistGroup();
+        entityManager.getTransaction().begin();
+        Album album = entityManager.find(Album.class, albumId);
+        Group group = entityManager.find(Group.class, groupId);
+        aag.setAlbum(album);
+        aag.setGroup(group);
+        entityManager.persist(aag);
+        entityManager.getTransaction().commit();
+    }
+
+    public void removeGroup(Long albumId, Long groupId) {
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        Album album = entityManager.find(Album.class, albumId);
+        Group group = entityManager.find(Group.class, groupId);
+        Collection<AlbumArtistGroup> aags = album.getAlbumArtistGroups();
+        for (AlbumArtistGroup aag : aags) {
+            if (aag.getGroup() != null && aag.getGroup().equals(group)) {
+                aag.setGroup(null);
+                entityManager.persist(aag);
+            }
+        }
+        entityManager.getTransaction().commit();
     }
 
     public Group findByName(final String groupName) {

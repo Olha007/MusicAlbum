@@ -13,28 +13,6 @@ public class AlbumDaoImpl extends MusicAlbumDaoImpl<Album> {
         setClazz(Album.class);
     }
 
-    public void assignArtist(Long albumId, Long artistId) {
-        EntityManager entityManager = getEntityManager();
-        AlbumArtistGroup aag = new AlbumArtistGroup();
-        entityManager.getTransaction().begin();
-        Album album = entityManager.find(Album.class, albumId);
-        Artist artist = entityManager.find(Artist.class, artistId);
-        aag.setAlbum(album);
-        aag.setArtist(artist);
-
-        entityManager.persist(aag);
-        entityManager.getTransaction().commit();
-    }
-
-    public void removeArtist(Long albumId, Long artistId) {
-        EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
-        Album album = entityManager.find(Album.class, albumId);
-        Artist artist = entityManager.find(Artist.class, artistId);
-        album.getAlbumArtistGroups().removeIf(aag -> aag.getArtist().equals(artist));
-        entityManager.getTransaction().commit();
-    }
-
     public List<Album> findByAlbumName(final String albumName) {
         EntityManager entityManager = getEntityManager();
         TypedQuery<Album> query = entityManager

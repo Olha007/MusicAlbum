@@ -4,12 +4,40 @@ import ua.edu.znu.musicalbum.model.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.Collection;
 import java.util.List;
 
 public class ArtistDaoImpl extends MusicAlbumDaoImpl<Artist> {
 
     public ArtistDaoImpl() {
         setClazz(Artist.class);
+    }
+
+    public void assignArtist(Long albumId, Long artistId) {
+        EntityManager entityManager = getEntityManager();
+        AlbumArtistGroup aag = new AlbumArtistGroup();
+        entityManager.getTransaction().begin();
+        Album album = entityManager.find(Album.class, albumId);
+        Artist artist = entityManager.find(Artist.class, artistId);
+        aag.setAlbum(album);
+        aag.setArtist(artist);
+        entityManager.persist(aag);
+        entityManager.getTransaction().commit();
+    }
+
+    public void removeArtist(Long albumId, Long artistId) {
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        Album album = entityManager.find(Album.class, albumId);
+        Artist artist = entityManager.find(Artist.class, artistId);
+        Collection<AlbumArtistGroup> aags = album.getAlbumArtistGroups();
+        for (AlbumArtistGroup aag : aags) {
+            if (aag.getArtist() != null && aag.getArtist().equals(artist)) {
+                aag.setArtist(null);
+                entityManager.persist(aag);
+            }
+        }
+        entityManager.getTransaction().commit();
     }
 
     public Artist findByName(final String firstName, final String lastName) {
