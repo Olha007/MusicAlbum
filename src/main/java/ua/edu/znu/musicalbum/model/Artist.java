@@ -1,6 +1,7 @@
 package ua.edu.znu.musicalbum.model;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
@@ -13,6 +14,7 @@ public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "artist_id", nullable = false)
+    @ToString.Exclude
     private Long id;
 
 
